@@ -1,0 +1,23 @@
+.allLamps{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* gap: 70px;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.allLamps div{
+/* width: 100px;
+height:100px; */
+width: 30px;
+height:30px;
+background-color: white;
+border: 1px solid black;
+border-radius: 50px;
+}
+
+.lightOn {
+background-color: rgb(255, 149, 0);
+box-shadow: 0 0 20px 5px rgba(255, 166, 0, 0.833); /* Glow effect */
+animation: blink 1s infinite alternate; /* Blinking effect */
+}
