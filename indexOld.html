@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hit the light</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let myInterval = 0;
+      let points = 0;
+      let selectedLampIndex = null;
+
+      function updateView() {
+        let html = `
+        <div id="result"></div>
+        <div class="allLamps">
+            <div id="lamp-0" onclick="selectLamp(${0})"></div>
+            <div id="lamp-1" onclick="selectLamp(${1})"></div>
+            <div id="lamp-2" onclick="selectLamp(${2})"></div>
+            <div id="lamp-3" onclick="selectLamp(${3})"></div>
+            <div id="lamp-4" onclick="selectLamp(${4})"></div>
+            <div id="lamp-5" onclick="selectLamp(${5})"></div>
+            <div id="lamp-6" onclick="selectLamp(${6})"></div>
+            <div id="lamp-7" onclick="selectLamp(${7})"></div>
+            <div id="lamp-8" onclick="selectLamp(${8})"></div>
+            <div id="lamp-9" onclick="selectLamp(${9})"></div>
+            <div id="lamp-10" onclick="selectLamp(${10})"></div>
+            <div id="lamp-11" onclick="selectLamp(${11})"></div>
+            <div id="lamp-12" onclick="selectLamp(${12})"></div>
+            <div id="lamp-13" onclick="selectLamp(${13})"></div>
+            <div id="lamp-14" onclick="selectLamp(${14})"></div>
+            <div id="lamp-15" onclick="selectLamp(${15})"></div>
+            <div id="lamp-16" onclick="selectLamp(${16})"></div>
+            <div id="lamp-17" onclick="selectLamp(${17})"></div>
+            <div id="lamp-18" onclick="selectLamp(${18})"></div>
+            <div id="lamp-19" onclick="selectLamp(${19})"></div>
+            <div id="lamp-20" onclick="selectLamp(${20})"></div>
+            <div id="lamp-21" onclick="selectLamp(${21})"></div>
+            <div id="lamp-22" onclick="selectLamp(${22})"></div>
+            <div id="lamp-23" onclick="selectLamp(${23})"></div>
+            <div id="lamp-24" onclick="selectLamp(${24})"></div>
+        </div>
+        <button onclick="start()">Start</button>
+        `;
+        document.getElementById("app").innerHTML = html;
+        // Prøve med for loop for å lage div'ene?
+      }
+
+      function start() {
+          points = 0;
+          selectedLampIndex = null;
+          gameActive = true;
+          document.getElementById('result').innerHTML = `Points: ${points}`;
+        
+        if(myInterval) clearInterval(myInterval);
+        myInterval = setInterval(selectRandomLamp, 1500);
+
+      }
+
+      function selectRandomLamp() {
+        if (selectedLampIndex !== null) {
+          document
+            .getElementById(`lamp-${selectedLampIndex}`)
+            .classList.remove("lightOn");
+        }
+        selectedLampIndex = Math.floor(Math.random() * 25);
+        let selectedLamp = document.getElementById(`lamp-${selectedLampIndex}`);
+        selectedLamp.classList.add('lightOn');
+
+        console.log("selected Lamp Index", selectedLampIndex);
+      }
+
+      function selectLamp(clicked) {
+        if (!gameActive) return;
+        else if (clicked == selectedLampIndex) {
+          points++;
+          document.getElementById('result').innerHTML = `Points: ${points}`;
+        } else {
+          points--;
+          document.getElementById('result').innerHTML = `Points: ${points}`;
+        }
+        if (points == 10) {
+          stopGame("You win!");
+        } else if (points <= -1) {
+          stopGame("You lose");
+        }
+      }
+
+      function stopGame(message) {
+        gameActive = false;
+        clearInterval(myInterval);
+        document.getElementById(
+          "result"
+        ).innerHTML = `${message} Points: ${points}`;
+      }
+
+      updateView();
+    </script>
+  </body>
+</html>

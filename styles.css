@@ -1,3 +1,11 @@
+#app {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
 .allLamps{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -9,15 +17,41 @@
 .allLamps div{
 /* width: 100px;
 height:100px; */
-width: 30px;
-height:30px;
+width: 100px;
+height:100px;
 background-color: white;
 border: 1px solid black;
 border-radius: 50px;
 }
 
+.textWindow {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: black;
+  }
+
 .lightOn {
-background-color: rgb(255, 149, 0);
-box-shadow: 0 0 20px 5px rgba(255, 166, 0, 0.833); /* Glow effect */
-animation: blink 1s infinite alternate; /* Blinking effect */
+background-color:yellow;
+box-shadow: 0 0 20px 5px rgba(255, 166, 0, 0.833);
+animation: blink 1s infinite alternate;
 }
+
+.lightOff {
+    background-color: black;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;}
+
+    button:hover {
+        background-color: #0056b3;
+      }
