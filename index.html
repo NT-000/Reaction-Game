@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <body onload="startScreen()">
     <div id="app"></div>
 
     <script>
-      let targetCircle = '';
+      let targetCircle = "";
       let gameMessage = "";
       let points = 0;
 
@@ -24,47 +25,48 @@
         let html = `
                 <div class="allLamps">
                   ${targetCircle}
+                  </div> ;
                   <div class="textWindow">
                       ${gameMessage}
-                  </div>
-                  </div> `;
+                  </div>`;
         document.getElementById("app").innerHTML = html;
       }
-
-      function startScreen() {
-        gameMessage = "Click on the yellow light as fast as you can!";
-        let startScreen = `
-              <div class="textWindow">
-                ${gameMessage}
-                  </div>
-                  <button onclick="startGame()">Start</button>`;
-        document.getElementById('app').innerHTML = startScreen;
+        function startScreen() {
+        targetCircle = '';
+        gameMessage = `
+                <div>Click on the yellow light as fast as you can!</div>
+                <div class="textWindow"></div>
+                <button onclick="startGame()">Start</button>`;
+        updateView();
       }
 
       function yellowCircle() {
-        targetCircle = '';
-        let randomNumber = Math.floor(Math.random() * 24);
-        for (let i = 0; i < 24; i++) {
-          if (randomNumber === i) {
+        targetCircle = "";
+        let randomNumber = Math.floor(Math.random() * 25);
+        for (let i = 0; i < 25; i++) {
+          if (randomNumber == i) {
             targetCircle += `<div class="lightOn" onclick="rightAnswer()"></div>`;
           } else {
             targetCircle += `<div class="lightOff" onclick="wrongAnswer()"></div>`;
           }
         }
+        updateView();
       }
 
       function startGame() {
-        targetCircle = '';
+        gameMessage = '';
+        targetCircle = "";
         startTime = new Date().getTime();
         yellowCircle();
         updateView();
       }
 
       function wrongAnswer() {
+        // targetCircle = '';
         finishTime = new Date().getTime();
         spentMilliseconds = Math.floor(finishTime - startTime);
         spentSeconds = spentMilliseconds / 1000;
-        gameMessage = /*HTML*/`
+        gameMessage = /*HTML*/ `
               <div class="textWindow">
                   Feil lys, du brukte ${spentSeconds} sekunder
                           <button onclick="startScreen()">Restart</button>
@@ -75,13 +77,13 @@
       }
 
       function rightAnswer() {
+        // targetCircle = '';
         finishTime = new Date().getTime();
         spentMilliseconds = Math.floor(finishTime - startTime);
         spentSeconds = spentMilliseconds / 1000;
         gameMessage = /*HTML*/ `
               <div class="textWindow">
                   Fuck yeah,du brukte ${spentSeconds} sekunder!
-                  <div class="startBtn">
                           <button onclick="startScreen()">Restart</button>
                           </div>
                   </div>`;
